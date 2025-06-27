@@ -25,7 +25,9 @@ This system employs several agents working together:
 <img width="1042" alt="Screenshot 2025-03-22 at 6 19 07 PM" src="https://github.com/user-attachments/assets/cbae3dcf-b571-490d-b0ad-3f0f035ac0d4" />
 
 
-**Note**: the system simulates trading decisions, it does not actually trade.
+**Note**: by default the system only simulates trading decisions. If you set your
+Alpaca API keys, the resulting orders will be sent automatically to your
+brokerage account.
 
 [![Twitter Follow](https://img.shields.io/twitter/follow/virattt?style=social)](https://twitter.com/virattt)
 
@@ -62,6 +64,9 @@ git clone https://github.com/virattt/ai-hedge-fund.git
 cd ai-hedge-fund
 ```
 
+You can run `./setup.sh` for a one-step install of dependencies and creation of
+the `.env` file, then edit it with your API keys.
+
 1. Install Poetry (if not already installed):
 ```bash
 curl -sSL https://install.python-poetry.org | python3 -
@@ -91,6 +96,12 @@ GROQ_API_KEY=your-groq-api-key
 # For getting financial data to power the hedge fund
 # Get your Financial Datasets API key from https://financialdatasets.ai/
 FINANCIAL_DATASETS_API_KEY=your-financial-datasets-api-key
+
+# For sending trades to Alpaca (paper or live)
+ALPACA_API_KEY=your-alpaca-api-key
+ALPACA_SECRET_KEY=your-alpaca-secret-key
+# Use https://paper-api.alpaca.markets for paper trading or https://api.alpaca.markets for live
+ALPACA_BASE_URL=https://paper-api.alpaca.markets
 ```
 
 ### Using Docker
@@ -156,6 +167,9 @@ run.bat --ticker AAPL,MSFT,NVDA main
 
 **Example Output:**
 <img width="992" alt="Screenshot 2025-01-06 at 5 50 17 PM" src="https://github.com/user-attachments/assets/e8ca04bf-9989-4a7d-a8b4-34e04666663b" />
+
+If the Alpaca environment variables are configured, these commands will also
+send the generated orders to your brokerage account.
 
 You can also specify a `--ollama` flag to run the AI hedge fund using local LLMs.
 
